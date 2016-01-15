@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Compile Boost v1.49.0 | Shane&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="对C++程序员来说，Boost是一个非常有名的库，里面提供了很多强大的功能。
+不过，我之前一直没有使用和研究过Boost，最近看一些开源的代码中有使用Boost，感觉很不错，于是，今天抽一点时间先将Boost的使用环境先搭起来，后面慢慢学习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Compile Boost v1.49.0">
+<meta property="og:url" content="http://yoursite.com/2012/03/17/compile-boost-v1-dot-49-dot-0/index.html">
+<meta property="og:site_name" content="Shane's Blog">
+<meta property="og:description" content="对C++程序员来说，Boost是一个非常有名的库，里面提供了很多强大的功能。
+不过，我之前一直没有使用和研究过Boost，最近看一些开源的代码中有使用Boost，感觉很不错，于是，今天抽一点时间先将Boost的使用环境先搭起来，后面慢慢学习。">
+<meta property="og:updated_time" content="2012-03-17T13:55:07.218Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Compile Boost v1.49.0">
+<meta name="twitter:description" content="对C++程序员来说，Boost是一个非常有名的库，里面提供了很多强大的功能。
+不过，我之前一直没有使用和研究过Boost，最近看一些开源的代码中有使用Boost，感觉很不错，于是，今天抽一点时间先将Boost的使用环境先搭起来，后面慢慢学习。">
+  
+    <link rel="alternative" href="/atom.xml" title="Shane&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="overlay"></div>
+  <div id="header-outer" class="outer">
+    <div id="profile_img">
+      <img id="circle_img" src="holder.js/150x150" />
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shane&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-menu">
+      <nav id="main-nav">
+        <ul>
+        
+          <li><a href="/"><i class="fa fa-home icon-setting"></i></a></li>
+        
+          <li><a href="/archives"><i class="fa fa-archive icon-setting"></i></a></li>
+        
+          <li><a href="/about"><i class="fa fa-user icon-setting"></i></a></li>
+        
+        
+          <li><a href="/atom.xml"><i class="fa fa-rss %> icon-setting"></i></a></li>
+        
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-compile-boost-v1-dot-49-dot-0" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/03/17/compile-boost-v1-dot-49-dot-0/" class="article-date">
+  <time datetime="2012-03-17T13:15:00.000Z" itemprop="datePublished">2012-03-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Boost/">Boost</a>►<a class="article-category-link" href="/categories/Boost/C/">C++</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Compile Boost v1.49.0
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对C++程序员来说，Boost是一个非常有名的库，里面提供了很多强大的功能。</p>
+<p>不过，我之前一直没有使用和研究过Boost，最近看一些开源的代码中有使用Boost，感觉很不错，于是，今天抽一点时间先将Boost的使用环境先搭起来，后面慢慢学习。</p>
+<a id="more"></a>
+<p>##编译Boost</p>
+<ul>
+<li><p>先到<a href="http://www.boost.org/" target="_blank" rel="external">Boost的官方网站</a>上下载最新的版本Boost v1.49.0, 我选择的是<a href="http://sourceforge.net/projects/boost/files/boost/1.49.0/" target="_blank" rel="external">boost_1_49_0.7z</a>;</p>
+</li>
+<li><p>将下载的boost_1_49_0.7z解压缩到D:\Program Files\boost_1_49_0中;</p>
+</li>
+<li><p>为了自动编译Boost，编写了下面的Batch，将Batch代码拷贝到文本文件中，重新命名为为compile_boost_1_49_0.bat;</p>
+</li>
+</ul>
+<script src="//gist.github.com/2058696.js"></script>
+<p>由于我使用的VS2005，所以使用了<code>--toolset=msvc-8.0</code>。</p>
+<p>如果使用的是其他版本的VS，则上述的代码要作一点小修改，具体就是：</p>
+<p>VS2008 -&gt; <code>--toolset=msvc-9.0</code>     VS2010 -&gt; <code>--toolset=msvc-10.0</code> </p>
+<p>当然，lib的存放的路径也可以改动一下。</p>
+<ul>
+<li><p>将上面的compile_boost_1_49_0.bat文件拷贝到D:\Program Files\boost_1_49_0目录中;</p>
+</li>
+<li><p>双击运行compile_boost_1_49_0.bat，这样就开始了漫长的自动编译过程，整个过程大概要2小时（编译了32位和64位的全部lib）;</p>
+</li>
+<li><p>编译结束后，生成的Libs都在D:\Program Files\boost_1_49_0\stage\lib\win32\vs8_0和D:\Program Files\boost_1_49_0\stage\lib\x64\vs8_0两个文件夹下；</p>
+</li>
+</ul>
+<p>到这里Boost编译的过程就结束了。</p>
+<p>##设置VS2005</p>
+<ul>
+<li><p>在Tools-&gt;Options-&gt;Projects and Solutions-&gt;VC++ Directories中：</p>
+<pre><code>- Win32平台加入Include files和Library files的路径
+    - Include files: D:\Program Files\boost_1_49_0
+    - Library files: D:\Program Files\boost_1_49_0\stage\lib\win32\vs8_0
+
+- X64平台加入Include files和Library files的路径
+    - Include files: D:\Program Files\boost_1_49_0
+    - Library files: D:\Program Files\boost_1_49_0\stage\lib\x64\vs8_0
+</code></pre></li>
+<li><p>通过上述的设置，在VS2005中就可以正常使用Boost了。</p>
+</li>
+</ul>
+<p><strong>相信此时你一定很激动，赶紧写个测试程序，来体验一下Boost的强大功能吧!</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2012/03/17/compile-boost-v1-dot-49-dot-0/" data-id="cijfq743x0032hwjwwtvj4mlw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2012/03/18/64bit-programming/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          VS2005下的64位编程与移植
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2012/03/07/isdb-t-slash-sbtvd-t-closed-caption/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ISDB-T/SBTVD-T Closed Caption</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Shane Wu<br>
+      <a href="https://github.com/ken8203/hexo-theme-alberta" target="_blank">Alberta</a> by <a href="http://jaychung.tw" target="_blank">jaychung</a>. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Thank <a href="http://subtlepatterns.com/" target="_blank">Subtlepatterns</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//imsky.github.io/holder/holder.js"></script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

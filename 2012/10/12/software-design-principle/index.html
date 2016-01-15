@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>软件设计的几点思考和总结 | Shane&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="软件设计是不易的，尤其要设计出结构良好、可靠性高、又不失可扩展性和可维护性的软件更是困难的事。
+随着项目的积累、经验的丰富，不同阶段，自己对设计的理解也是不一样的，就像看一本好书，每读一遍，对其中内容的理解往往也会不同一样。
+下面是自己对如何设计良好软件的一点理解：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件设计的几点思考和总结">
+<meta property="og:url" content="http://yoursite.com/2012/10/12/software-design-principle/index.html">
+<meta property="og:site_name" content="Shane's Blog">
+<meta property="og:description" content="软件设计是不易的，尤其要设计出结构良好、可靠性高、又不失可扩展性和可维护性的软件更是困难的事。
+随着项目的积累、经验的丰富，不同阶段，自己对设计的理解也是不一样的，就像看一本好书，每读一遍，对其中内容的理解往往也会不同一样。
+下面是自己对如何设计良好软件的一点理解：">
+<meta property="og:image" content="http://farm9.staticflickr.com/8464/8079555786_e74017d4f8_b.jpg">
+<meta property="og:updated_time" content="2012-10-12T12:34:54.156Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="软件设计的几点思考和总结">
+<meta name="twitter:description" content="软件设计是不易的，尤其要设计出结构良好、可靠性高、又不失可扩展性和可维护性的软件更是困难的事。
+随着项目的积累、经验的丰富，不同阶段，自己对设计的理解也是不一样的，就像看一本好书，每读一遍，对其中内容的理解往往也会不同一样。
+下面是自己对如何设计良好软件的一点理解：">
+  
+    <link rel="alternative" href="/atom.xml" title="Shane&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="overlay"></div>
+  <div id="header-outer" class="outer">
+    <div id="profile_img">
+      <img id="circle_img" src="holder.js/150x150" />
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shane&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-menu">
+      <nav id="main-nav">
+        <ul>
+        
+          <li><a href="/"><i class="fa fa-home icon-setting"></i></a></li>
+        
+          <li><a href="/archives"><i class="fa fa-archive icon-setting"></i></a></li>
+        
+          <li><a href="/about"><i class="fa fa-user icon-setting"></i></a></li>
+        
+        
+          <li><a href="/atom.xml"><i class="fa fa-rss %> icon-setting"></i></a></li>
+        
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-software-design-principle" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/10/12/software-design-principle/" class="article-date">
+  <time datetime="2012-10-12T11:48:00.000Z" itemprop="datePublished">2012-10-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Principle/">Design-Principle</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      软件设计的几点思考和总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>软件设计是不易的，尤其要设计出结构良好、可靠性高、又不失可扩展性和可维护性的软件更是困难的事。</p>
+<p>随着项目的积累、经验的丰富，不同阶段，自己对设计的理解也是不一样的，就像看一本好书，每读一遍，对其中内容的理解往往也会不同一样。</p>
+<p>下面是自己对如何设计良好软件的一点理解：</p>
+<a id="more"></a>   
+<p>1.模块/类要尽可能只做一件事，并且要把事做好（符合单一职责原则、高内聚低耦合），这样也有利于提高重用性（KISS原则、DRY原则）</p>
+<p>模块/类设计的注意点：</p>
+<ul>
+<li><p>模块所处层次是否分明[分层设计(横行划分)]，功能是否清晰[模块化设计(纵向划分)、正交设计]</p>
+</li>
+<li><p>模块接口要仔细设计</p>
+</li>
+</ul>
+<p>接口要提供哪些功能，接口函数/参数命名是否直达其意（命令查询分离原则），有什么限制，如何返回结果，是否易用，尽可能多从用户使用角度考虑接口的设计；</p>
+<p>接口设计要符合“接口隔离原则”，大而全的接口往往没有多个功能分类明确的接口要灵活、易用。</p>
+<ul>
+<li><p>信息隐藏要做好，模块的边界(接口)要清晰，用户对模块的了解要尽可能少（最少知识原则）</p>
+</li>
+<li><p>模块内部实现要尽量符合“迪米特法则”和“契约式设计”</p>
+</li>
+<li><p>只和必要的模块产生依赖，模块之间绝不可出现循环依赖</p>
+</li>
+<li><p>一组功能相关的模块可放在一起，组成功能包，这样便于修改和维护（共同关闭原则）</p>
+</li>
+</ul>
+<p>2.设计时，应权衡一下是否要考虑可扩展性(需求将来是否会变化，如果比较稳定则不用考虑，避免过度设计)</p>
+<p>如何设计来保证模块/函数具备一定的可扩展性（要符合开闭原则）？</p>
+<ul>
+<li><p>找出可能的变化，合理抽象（封装变化），提炼接口， 针对接口编程(依赖稳定的抽象/接口)， 不依赖具体的实现</p>
+</li>
+<li><p>组合优先继承（模块之间的依赖优先考虑是否可采用组合，使用继承主要是以使用多态为目的[里氏替换原则/针对接口编程]）</p>
+</li>
+<li><p>模块之间要正交（模块间功能要尽可能不重叠）</p>
+</li>
+<li><p>高层模块和低层模块之间要符合”依赖倒置原则”和“好莱坞原则”</p>
+</li>
+</ul>
+<p>高层模块提供低层模块所需的接口，高层模块实现时针对这些接口编程，不依赖低层的具体实现；</p>
+<p>而低层模块需要实现这些接口，实际运行时以多态的形式为高层模块提供功能（好莱坞原则）。</p>
+<p>3.层次是一种软件抽象，分层设计可提高软件的灵活性，很多设计手法，其本质都是在软件的结构中加入更多的层次。</p>
+<p>如对文件操作进行封装，提供一个文件操作类来代理文件操作请求，这样可屏蔽不同操作系统下文件操作API的不同，增加可移植性。</p>
+<p>但也要充分考虑到层次带来的复杂性，会增加对软件理解和维护的难度。</p>
+<p>因此，要努力控制层次在三层左右，否则宁愿牺牲一点抽象（软件设计是一个权衡和选择的过程）。</p>
+<p>另外，层次抽象要保持内在的一致性，一个层次内部应该只做自己应该做的事，而不要去做其他层应该做的事。</p>
+<p>如在设计DirectShow Filter时，应尽量把功能层次的模块与Filter层次分开，在Filter层次中只做DirectShow框架下filter应实现的功能，</p>
+<p>如媒体类型的协商、与其前端/后端filter的连接、Filter之间的数据流传递等，而不涉及具体功能逻辑部分的实现；</p>
+<p>同样，功能实现层也不应该依赖DirectShow框架(如数据的输出可用回调来实现解耦)。</p>
+<p>这样做的好处是，以后可单独提取出具体的功能模块，移植到其他非DirectShow框架中，即Filter层仅是一层壳而已。</p>
+<p>否则，这样的剥离将难以实现，同时也会因为层次边界的模糊而影响程序的可读性。</p>
+<p>4.代码实现时，要有良好的编码风格，且风格要统一，函数和变量命名要准确表达其意；</p>
+<p>逻辑实现要简洁利索，避免功能大而全的复杂函数，函数实现也要尽量符合KISS原则，只负责一件事；</p>
+<p>总之，要时刻考虑软件维护者的感受（说不定几个月、几年之后你就是软件的维护者呢），尽可能减少让人产生怪异的感觉。</p>
+<p>即尽一切方法提供程序的可读性。</p>
+<hr>
+<p>附上一份关于软件设计基本原则的思维导图，以便参考。</p>
+<p><a href="http://www.flickr.com/photos/shanewfx/8079555786/" title="Flickr 上 shanewfx 的 软件设计基本指导思想" target="_blank" rel="external"><img src="http://farm9.staticflickr.com/8464/8079555786_e74017d4f8_b.jpg" width="970" height="1024" alt="软件设计基本指导思想"></a></p>
+<p>图片比较大，请移步<a href="http://tu.mindpin.com/mindmaps/54796" target="_blank" rel="external">这里</a>直接查看原始文件。</p>
+<p>(完)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2012/10/12/software-design-principle/" data-id="cijfq73q0000hhwjwmnxk2nu4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2012/11/23/mfc-custom-control/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          使用MFC Custom Control实现界面的自绘
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2012/10/09/my-technology-roadmap/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">个人技术提升Roadmap</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Shane Wu<br>
+      <a href="https://github.com/ken8203/hexo-theme-alberta" target="_blank">Alberta</a> by <a href="http://jaychung.tw" target="_blank">jaychung</a>. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Thank <a href="http://subtlepatterns.com/" target="_blank">Subtlepatterns</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//imsky.github.io/holder/holder.js"></script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

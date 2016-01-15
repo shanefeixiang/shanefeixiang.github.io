@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>A Simple Log Tool | Shane&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="对于程序员来说，debug是再正常不过的事。
+在遇到问题时，通过分析程序的产生的Log文件来查找和验证问题发生的原因。
+下面是一个简单的log tool，可以满足一般的log需求。
+代码已经放到Github上了，需要的可到这里下载。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Simple Log Tool">
+<meta property="og:url" content="http://yoursite.com/2012/03/18/a-simple-log-tool/index.html">
+<meta property="og:site_name" content="Shane's Blog">
+<meta property="og:description" content="对于程序员来说，debug是再正常不过的事。
+在遇到问题时，通过分析程序的产生的Log文件来查找和验证问题发生的原因。
+下面是一个简单的log tool，可以满足一般的log需求。
+代码已经放到Github上了，需要的可到这里下载。">
+<meta property="og:updated_time" content="2012-03-18T12:13:05.046Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A Simple Log Tool">
+<meta name="twitter:description" content="对于程序员来说，debug是再正常不过的事。
+在遇到问题时，通过分析程序的产生的Log文件来查找和验证问题发生的原因。
+下面是一个简单的log tool，可以满足一般的log需求。
+代码已经放到Github上了，需要的可到这里下载。">
+  
+    <link rel="alternative" href="/atom.xml" title="Shane&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="overlay"></div>
+  <div id="header-outer" class="outer">
+    <div id="profile_img">
+      <img id="circle_img" src="holder.js/150x150" />
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shane&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-menu">
+      <nav id="main-nav">
+        <ul>
+        
+          <li><a href="/"><i class="fa fa-home icon-setting"></i></a></li>
+        
+          <li><a href="/archives"><i class="fa fa-archive icon-setting"></i></a></li>
+        
+          <li><a href="/about"><i class="fa fa-user icon-setting"></i></a></li>
+        
+        
+          <li><a href="/atom.xml"><i class="fa fa-rss %> icon-setting"></i></a></li>
+        
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-a-simple-log-tool" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/03/18/a-simple-log-tool/" class="article-date">
+  <time datetime="2012-03-18T12:10:00.000Z" itemprop="datePublished">2012-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C/">C++</a>►<a class="article-category-link" href="/categories/C/Log/">Log</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      A Simple Log Tool
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对于程序员来说，debug是再正常不过的事。</p>
+<p>在遇到问题时，通过分析程序的产生的Log文件来查找和验证问题发生的原因。</p>
+<p>下面是一个简单的log tool，可以满足一般的log需求。</p>
+<p>代码已经放到Github上了，需要的可到<a href="https://github.com/shanewfx/Log" target="_blank" rel="external">这里</a>下载。</p>
+<a id="more"></a>
+<p>该log tool实现了log分级，也支持自己指定log file的存放位置，缺省情况下，log文件为<code>C:\DebugInfo.log</code>。</p>
+<p>因为log没有加锁，所以在多线程下产生的log会有错乱的现象，因此，在多线程中，可以在Log()函数的开始处加锁来解决。</p>
+<hr>
+<p>###log.h</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">ifndef</span> _LOG_H</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> _LOG_H</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> TEST</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> LOG_FILE_PATH <span class="string">"C:\\DebugInfo.log"</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">ifdef</span> TEST</span></span><br><span class="line">	<span class="preprocessor">#<span class="keyword">define</span> LogData Logger::Instance().Log</span></span><br><span class="line">	<span class="preprocessor">#<span class="keyword">define</span> SetLogFile Logger::SetLogFilePath</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">else</span></span></span><br><span class="line">	<span class="preprocessor">#<span class="keyword">define</span> LogData</span></span><br><span class="line">	<span class="preprocessor">#<span class="keyword">define</span> SetLogFile</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> tagLogLevel</span><br><span class="line">&#123;</span><br><span class="line">	LOG_TRACE,</span><br><span class="line">	LOG_INFO,</span><br><span class="line">	LOG_WARNING,</span><br><span class="line">	LOG_ERROR,</span><br><span class="line">	LOG_FATAL,</span><br><span class="line">	LOG_NONE = <span class="number">10</span>,</span><br><span class="line">&#125;LogLevel;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Logger</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> Logger&amp; <span class="title">Instance</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SetLogFilePath</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; strFilePath, <span class="keyword">bool</span> bAppend = <span class="literal">false</span>)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SetLogLevel</span><span class="params">(<span class="keyword">const</span> LogLevel Level)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Initialise</span><span class="params">(<span class="keyword">bool</span> bAppend = <span class="literal">false</span>)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Dispose</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Log</span><span class="params">(<span class="keyword">const</span> LogLevel Level, <span class="keyword">const</span> <span class="keyword">char</span> *Format, ...)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Logger();</span><br><span class="line">	Logger(Logger <span class="keyword">const</span>&amp;);</span><br><span class="line">	Logger&amp; <span class="keyword">operator</span>=(Logger <span class="keyword">const</span>&amp;);</span><br><span class="line">	~Logger();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span> FILE*        m_hLogFile;</span><br><span class="line">	<span class="keyword">static</span> <span class="built_in">std</span>::<span class="built_in">string</span>	m_strFilePath;</span><br><span class="line">	<span class="keyword">static</span> LogLevel	    m_LogLevel;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span><span class="comment">//_LOG_H</span></span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>###log.cpp</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"log.h"</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdarg.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">FILE* Logger::m_hLogFile = <span class="literal">NULL</span>;</span><br><span class="line">LogLevel Logger::m_LogLevel = LOG_TRACE;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> Logger::m_strFilePath = LOG_FILE_PATH;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* LogLevelStr[] = &#123;</span><br><span class="line">    <span class="string">"TRACE"</span>,</span><br><span class="line">    <span class="string">"INFO"</span>,</span><br><span class="line">    <span class="string">"WARNING"</span>,</span><br><span class="line">    <span class="string">"ERROR"</span>,</span><br><span class="line">    <span class="string">"CRITICAL"</span>,</span><br><span class="line">    <span class="string">"FATAL"</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Logger&amp; Logger::Instance() </span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">static</span> Logger LoggerInstance;</span><br><span class="line">  <span class="keyword">return</span> LoggerInstance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Logger::SetLogFilePath(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; strFilePath, <span class="keyword">bool</span> bAppend)</span><br><span class="line">&#123;</span><br><span class="line">	m_strFilePath = strFilePath;</span><br><span class="line">	Dispose();</span><br><span class="line">	Initialise(bAppend);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Logger::SetLogLevel(<span class="keyword">const</span> LogLevel Level)</span><br><span class="line">&#123;</span><br><span class="line">	m_LogLevel = Level;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Logger::Logger()</span><br><span class="line">&#123;</span><br><span class="line">	Initialise(<span class="literal">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Logger::~Logger()</span><br><span class="line">&#123;</span><br><span class="line">	Dispose();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Logger::Initialise(<span class="keyword">bool</span> bAppend)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (m_strFilePath.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">		m_hLogFile = bAppend ? fopen(m_strFilePath.c_str(), <span class="string">"a+"</span>) </span><br><span class="line">			             : fopen(m_strFilePath.c_str(), <span class="string">"w+"</span>);	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Logger::Dispose()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="literal">NULL</span> != m_hLogFile) &#123;</span><br><span class="line">		fflush(m_hLogFile);</span><br><span class="line">		fclose(m_hLogFile);</span><br><span class="line">		m_hLogFile = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Logger::Log(<span class="keyword">const</span> LogLevel Level, <span class="keyword">const</span> <span class="keyword">char</span> *Format, ...)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (m_LogLevel &gt; Level) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="literal">NULL</span> == m_hLogFile) <span class="keyword">return</span>;	</span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> szBuffer[<span class="number">1024</span>];</span><br><span class="line"></span><br><span class="line">	va_list args;</span><br><span class="line">  va_start(args, Format);</span><br><span class="line">	<span class="built_in">vsprintf</span>(szBuffer, Format, args);</span><br><span class="line">	va_end(args);</span><br><span class="line"></span><br><span class="line">	SYSTEMTIME st;		</span><br><span class="line">	GetLocalTime(&amp;st);</span><br><span class="line">	<span class="keyword">if</span> (<span class="number">0</span> &gt; <span class="built_in">fprintf</span>(m_hLogFile, <span class="string">"[%02u:%02u:%02u:%03u]\t[%s]\t%s\n"</span>, </span><br><span class="line">		st.wHour, st.wMinute, st.wSecond, st.wMilliseconds, </span><br><span class="line">		LogLevelStr[Level], szBuffer)) &#123;</span><br><span class="line">		Dispose();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		fflush(m_hLogFile);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>###log的使用示例</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"Log.h"</span></span></span><br><span class="line"></span><br><span class="line">LogData(LOG_TRACE, <span class="string">"log information\n"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">100</span>;</span><br><span class="line">LogData(LOG_TRACE, <span class="string">"i = %d\n"</span>, i);</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> j = <span class="number">10</span>;</span><br><span class="line">LogData(LOG_TRACE, <span class="string">"i = %d, j = %d\n"</span>, i, j);</span><br><span class="line"></span><br><span class="line">SetLogFile(<span class="string">"c:\\log.txt"</span>); <span class="comment">//set log file path</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2012/03/18/a-simple-log-tool/" data-id="cijfq742q002uhwjwnoiezbam" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2012/03/26/vs2005-64bit-programming/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          VS2005 64-bit Programming Note
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2012/03/18/64bit-programming/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">VS2005下的64位编程与移植</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Shane Wu<br>
+      <a href="https://github.com/ken8203/hexo-theme-alberta" target="_blank">Alberta</a> by <a href="http://jaychung.tw" target="_blank">jaychung</a>. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Thank <a href="http://subtlepatterns.com/" target="_blank">Subtlepatterns</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//imsky.github.io/holder/holder.js"></script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

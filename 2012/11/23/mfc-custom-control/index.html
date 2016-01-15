@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用MFC Custom Control实现界面的自绘 | Shane&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近在做一个视频编辑的项目，其中界面部分有点复杂，负责这部分的同事使用了MFC的Custom Control来实现界面的自绘效果，目前DemoAP的初步效果已经出来，感觉还不错。
+因为工作以来基本没有接触过UI方面的编程，加之以前也没有使用过Custom Control，这次做一个简单学习和总结，以便后用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用MFC Custom Control实现界面的自绘">
+<meta property="og:url" content="http://yoursite.com/2012/11/23/mfc-custom-control/index.html">
+<meta property="og:site_name" content="Shane's Blog">
+<meta property="og:description" content="最近在做一个视频编辑的项目，其中界面部分有点复杂，负责这部分的同事使用了MFC的Custom Control来实现界面的自绘效果，目前DemoAP的初步效果已经出来，感觉还不错。
+因为工作以来基本没有接触过UI方面的编程，加之以前也没有使用过Custom Control，这次做一个简单学习和总结，以便后用。">
+<meta property="og:updated_time" content="2013-01-15T11:55:41.109Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用MFC Custom Control实现界面的自绘">
+<meta name="twitter:description" content="最近在做一个视频编辑的项目，其中界面部分有点复杂，负责这部分的同事使用了MFC的Custom Control来实现界面的自绘效果，目前DemoAP的初步效果已经出来，感觉还不错。
+因为工作以来基本没有接触过UI方面的编程，加之以前也没有使用过Custom Control，这次做一个简单学习和总结，以便后用。">
+  
+    <link rel="alternative" href="/atom.xml" title="Shane&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="overlay"></div>
+  <div id="header-outer" class="outer">
+    <div id="profile_img">
+      <img id="circle_img" src="holder.js/150x150" />
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shane&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-menu">
+      <nav id="main-nav">
+        <ul>
+        
+          <li><a href="/"><i class="fa fa-home icon-setting"></i></a></li>
+        
+          <li><a href="/archives"><i class="fa fa-archive icon-setting"></i></a></li>
+        
+          <li><a href="/about"><i class="fa fa-user icon-setting"></i></a></li>
+        
+        
+          <li><a href="/atom.xml"><i class="fa fa-rss %> icon-setting"></i></a></li>
+        
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-mfc-custom-control" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/11/23/mfc-custom-control/" class="article-date">
+  <time datetime="2012-11-23T03:45:00.000Z" itemprop="datePublished">2012-11-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MFC/">MFC</a>►<a class="article-category-link" href="/categories/MFC/UI/">UI</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用MFC Custom Control实现界面的自绘
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在做一个视频编辑的项目，其中界面部分有点复杂，负责这部分的同事使用了MFC的Custom Control来实现界面的自绘效果，目前DemoAP的初步效果已经出来，感觉还不错。</p>
+<p>因为工作以来基本没有接触过UI方面的编程，加之以前也没有使用过Custom Control，这次做一个简单学习和总结，以便后用。</p>
+<a id="more"></a>
+<p>#####1.创建MFC工程</p>
+<p>在VS2005中创建一个基于Dialog的MFC工程，DemoUI；</p>
+<p>#####2.添加CMyPad类</p>
+<p>在DemoUI上右击选择Add-&gt;Class，在类向导中选择MFC Class，<br>再点击Add，在Class Name中填入类名，如CMyPad，选择Base class为CWnd，点击Finish，<br>这时自动生成MyPad.h和MyPad.cpp。</p>
+<p>#####3.打开DemoUI.rc，双击Dialog下的IDD_DEMOUI_DIALOG，进入对话框窗口设计界面</p>
+<p>#####4.在对话框上加入一个Custom Control控件</p>
+<p>#####5.设置Custom Control的属性</p>
+<p>设置如下属性，其他属性使用默认即可：</p>
+<figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ID ： IDC_CUSTOM_PAD</span><br><span class="line"><span class="class"><span class="keyword">Class</span>: <span class="title">MyDrawPad</span></span></span><br></pre></td></tr></table></figure>
+<p>其中，这里的MyDrawPad必须与注册窗口时使用的类名一致，否则编译可通过，但无法运行。</p>
+<p>#####6.在CMyPad类中添加一个用于注册窗口的成员函数BOOL RegisterWndClass()</p>
+<p>具体实现为：</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">BOOL CMyPad <span class="number">::</span> RegisterWndClass()</span><br><span class="line">&#123;</span><br><span class="line">       WNDCLASS windowclass <span class="comment">;</span></span><br><span class="line">       HINSTANCE hInst = AfxGetInstanceHandle ()<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">       //Check weather the class is registerd already</span><br><span class="line">       if (!(<span class="number">::</span>GetClassInfo ( hInst, MYWNDCLASS , &amp;windowclass )))</span><br><span class="line">       &#123;</span><br><span class="line">             //If not then we have to register the new class</span><br><span class="line">             windowclass .style = CS_DBLCLKS<span class="comment">; // | CS_HREDRAW | CS_VREDRAW;</span></span><br><span class="line">             windowclass .lpfnWndProc = <span class="number">::</span> DefWindowProc<span class="comment">;</span></span><br><span class="line">             windowclass .cbClsExtra = windowclass. cbWndExtra = 0<span class="comment">;</span></span><br><span class="line">             windowclass .hInstance = hInst<span class="comment">;</span></span><br><span class="line">             windowclass .hIcon = NULL<span class="comment">;</span></span><br><span class="line">             windowclass .hCursor = AfxGetApp ()-&gt;LoadStandardCursor ( IDC_ARROW)<span class="comment">;</span></span><br><span class="line">             windowclass .hbrBackground = <span class="number">::</span>GetSysColorBrush (COLOR_WINDOW )<span class="comment">;</span></span><br><span class="line">             windowclass .lpszMenuName = NULL<span class="comment">;</span></span><br><span class="line">             windowclass .lpszClassName = MYWNDCLASS<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">             if (!AfxRegisterClass (&amp; windowclass))</span><br><span class="line">             &#123;</span><br><span class="line">                   AfxThrowResourceException ()<span class="comment">;</span></span><br><span class="line">                   return FALSE <span class="comment">;</span></span><br><span class="line">             &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       return TRUE <span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，MYWNDCLASS是在MyPad.h中定义的宏：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hexcolor">#def</span>ine MYWNDCLASS  L <span class="string">"MyDrawPad"</span></span><br></pre></td></tr></table></figure>
+<p>(工程属性中设置为Unicode，API会调用对应的Unicode版本，因此字符串前需加上L)</p>
+<p>#####7.在主对话框类CDemoUIDlg中关联自定义控件类CMyPad</p>
+<p>首先在CDemoUIDlg类中添加一个成员：<code>CMyPad m_Pad</code> ;</p>
+<p>然后进行关联，方法有两种：</p>
+<ul>
+<li><p>在<code>CDemoUIDlg ::OnInitDialog</code>中关联：<code>m_Pad .SubclassDlgItem(IDC_CUSTOM_PAD, this)</code>;</p>
+</li>
+<li><p>在<code>CDemoUIDlg ::DoDataExchange</code>中关联：<code>DDX_Control(pDX, IDC_CUSTOM_PAD, m_Pad)</code>;</p>
+</li>
+</ul>
+<p>两种方法只能用其中一种，不可同时使用。</p>
+<p>#####8.为CMyPad添加消息响应函数</p>
+<p>在Class View中选择CMyPad，右击打开其属性界面，选择消息一栏，选择需要响应的消息，并增加对应的消息处理函数。</p>
+<p>如选择<code>WM_PAINT</code>，选择<code>&lt;Add&gt;OnPaint</code>，这样就在CMyPad中自动添加了响应WM_PAINT消息的处理函数OnPaint()。</p>
+<p>简单测试一下, OnPaint函数的实现如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CMyPad:: OnPaint ()</span><br><span class="line">&#123;</span><br><span class="line">       <span class="function">CPaintDC <span class="title">dc</span> <span class="params">( <span class="keyword">this</span>)</span></span>; <span class="comment">// device context for painting</span></span><br><span class="line">       <span class="comment">// <span class="doctag">TODO:</span> Add your message handler code here</span></span><br><span class="line">       <span class="comment">// Do not call CWnd::OnPaint() for painting messages</span></span><br><span class="line">       dc .DrawText ( <span class="string">L"test123"</span> , CRect(<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">100</span>), DT_LEFT );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#####9.效果测试</p>
+<p>编译运行，即可看到在Custom Control中绘制出”test123”字符。</p>
+<p>（完）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2012/11/23/mfc-custom-control/" data-id="cijfq73pb000chwjwetuhrlqv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2013/01/06/sublime-text2-for-programmer/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          程序员的代码编辑器--Sublime Text 2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2012/10/12/software-design-principle/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">软件设计的几点思考和总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Shane Wu<br>
+      <a href="https://github.com/ken8203/hexo-theme-alberta" target="_blank">Alberta</a> by <a href="http://jaychung.tw" target="_blank">jaychung</a>. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Thank <a href="http://subtlepatterns.com/" target="_blank">Subtlepatterns</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//imsky.github.io/holder/holder.js"></script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

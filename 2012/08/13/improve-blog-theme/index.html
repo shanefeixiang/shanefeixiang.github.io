@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Octopress主题改造 | Shane&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Octopress是一个非常不错的博客系统，具有很好的扩展性，默认也提供了一个很好的博客主题。
+随着越来越多的人开始使用Octopress搭建自己的个人博客，网络上出现了很多外观基本相同的博客。虽然Octopress默认的主题设计的很简洁、美观，但为了打造一个属于自己的博客，还是希望能够做的更美观一些。当然，借此机会自己也能够学习一点Web前端设计方面的知识。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Octopress主题改造">
+<meta property="og:url" content="http://yoursite.com/2012/08/13/improve-blog-theme/index.html">
+<meta property="og:site_name" content="Shane's Blog">
+<meta property="og:description" content="Octopress是一个非常不错的博客系统，具有很好的扩展性，默认也提供了一个很好的博客主题。
+随着越来越多的人开始使用Octopress搭建自己的个人博客，网络上出现了很多外观基本相同的博客。虽然Octopress默认的主题设计的很简洁、美观，但为了打造一个属于自己的博客，还是希望能够做的更美观一些。当然，借此机会自己也能够学习一点Web前端设计方面的知识。">
+<meta property="og:updated_time" content="2012-09-01T05:37:20.700Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Octopress主题改造">
+<meta name="twitter:description" content="Octopress是一个非常不错的博客系统，具有很好的扩展性，默认也提供了一个很好的博客主题。
+随着越来越多的人开始使用Octopress搭建自己的个人博客，网络上出现了很多外观基本相同的博客。虽然Octopress默认的主题设计的很简洁、美观，但为了打造一个属于自己的博客，还是希望能够做的更美观一些。当然，借此机会自己也能够学习一点Web前端设计方面的知识。">
+  
+    <link rel="alternative" href="/atom.xml" title="Shane&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="overlay"></div>
+  <div id="header-outer" class="outer">
+    <div id="profile_img">
+      <img id="circle_img" src="holder.js/150x150" />
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shane&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-menu">
+      <nav id="main-nav">
+        <ul>
+        
+          <li><a href="/"><i class="fa fa-home icon-setting"></i></a></li>
+        
+          <li><a href="/archives"><i class="fa fa-archive icon-setting"></i></a></li>
+        
+          <li><a href="/about"><i class="fa fa-user icon-setting"></i></a></li>
+        
+        
+          <li><a href="/atom.xml"><i class="fa fa-rss %> icon-setting"></i></a></li>
+        
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-improve-blog-theme" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/08/13/improve-blog-theme/" class="article-date">
+  <time datetime="2012-08-13T13:38:00.000Z" itemprop="datePublished">2012-08-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Octopress/">Octopress</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Octopress主题改造
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Octopress是一个非常不错的博客系统，具有很好的扩展性，默认也提供了一个很好的博客主题。</p>
+<p>随着越来越多的人开始使用Octopress搭建自己的个人博客，网络上出现了很多外观基本相同的博客。<br>虽然Octopress默认的主题设计的很简洁、美观，但为了打造一个属于自己的博客，还是希望能够做的更美观一些。<br>当然，借此机会自己也能够学习一点Web前端设计方面的知识。</p>
+<a id="more"></a>
+<p>Octopress支持SASS语法，改造Octopress主题基本是通过修改“sass\custom“下以scss为后缀名的文件来完成，大多数的改造是在_styles.scss这个文件中来实现。</p>
+<p>##1. 为博客添加背景图片</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="hexcolor">#555555</span> <span class="function">url</span>(<span class="string">"/images/wood.jpg"</span>);</span><br><span class="line">  <span class="comment">//background: #555555;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">body</span> &gt; <span class="tag">div</span> &#123; </span><br><span class="line">  <span class="attribute">background-image</span>: none; </span><br><span class="line"><span class="comment">//background: #F5F5D5</span></span><br><span class="line">&#125; <span class="comment">//侧边栏</span></span><br><span class="line"></span><br><span class="line"><span class="tag">body</span> &gt; <span class="tag">div</span> &gt; <span class="tag">div</span> &#123; <span class="comment">//文章内容</span></span><br><span class="line">  <span class="attribute">background-image</span>: none; </span><br><span class="line">  <span class="comment">//background: #F5F5D5; </span></span><br><span class="line">  <span class="comment">//background: url("/images/textbg.jpg");</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##2. 改造博客的Header区域</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">html &#123;</span><br><span class="line">  body &gt; header &#123;</span><br><span class="line">    background: none;</span><br><span class="line">	padding: <span class="number">1.6</span>em <span class="number">0</span> <span class="number">1</span>em <span class="number">0</span>;</span><br><span class="line">	h1 &#123;</span><br><span class="line">      @include text-shadow(<span class="number">0</span>px <span class="number">1</span>px <span class="number">0</span>px <span class="preprocessor">#<span class="number">999</span>, <span class="number">0</span>px <span class="number">2</span>px <span class="number">0</span>px #<span class="number">888</span>, <span class="number">0</span>px <span class="number">3</span>px <span class="number">0</span>px #<span class="number">777</span>, <span class="number">0</span>px <span class="number">4</span>px <span class="number">0</span>px #<span class="number">666</span>, <span class="number">0</span>px <span class="number">5</span>px <span class="number">0</span>px #<span class="number">555</span>, <span class="number">0</span>px <span class="number">6</span>px <span class="number">0</span>px #<span class="number">444</span>, <span class="number">0</span>px <span class="number">7</span>px <span class="number">0</span>px #<span class="number">333</span>, <span class="number">0</span>px <span class="number">8</span>px <span class="number">7</span>px #<span class="number">001135</span>);</span></span><br><span class="line">    &#125;</span><br><span class="line">    h2 &#123;</span><br><span class="line">      margin-top: <span class="number">.5</span>em;</span><br><span class="line">      display: none;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##3. 改造导航栏</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">body &gt; nav &#123;</span><br><span class="line">  <span class="comment">//background: url("/images/nav.jpg");</span></span><br><span class="line">  <span class="comment">//background: #555555;</span></span><br><span class="line">  ul.main-navigation &#123;</span><br><span class="line">    padding-left: <span class="number">3</span>px;</span><br><span class="line">  &#125;</span><br><span class="line">  ul.subscription &#123;</span><br><span class="line">    <span class="comment">//display: none;</span></span><br><span class="line">  &#125;</span><br><span class="line">  a &#123;</span><br><span class="line">    &amp;:hover &#123;</span><br><span class="line">      color: hsl(<span class="number">209.01</span>, <span class="number">86.94</span>%, <span class="number">50.04</span>%);</span><br><span class="line">      text-shadow:</span><br><span class="line">        hsl(<span class="number">209.01</span>, <span class="number">86.94</span>%, <span class="number">42.04</span>%) <span class="number">0</span>px <span class="number">0</span>px <span class="number">5</span>px,</span><br><span class="line">        hsl(<span class="number">209.01</span>, <span class="number">86.94</span>%, <span class="number">42.04</span>%) <span class="number">0</span>px <span class="number">0</span>px <span class="number">7</span>px,</span><br><span class="line">        hsl(<span class="number">209.01</span>, <span class="number">86.94</span>%, <span class="number">52.04</span>%) <span class="number">0</span>px <span class="number">0</span>px <span class="number">9</span>px,</span><br><span class="line">        hsl(<span class="number">209.01</span>, <span class="number">86.94</span>%, <span class="number">52.04</span>%) <span class="number">0</span>px <span class="number">0</span>px <span class="number">11</span>px,</span><br><span class="line">        hsl(<span class="number">0</span>, <span class="number">0</span>%, <span class="number">0</span>%) <span class="number">0</span> <span class="number">0</span> <span class="number">2</span>px;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    i &#123;</span><br><span class="line">      color: hsl(<span class="number">209.01</span>, <span class="number">86.94</span>%, <span class="number">50.04</span>%);</span><br><span class="line">      text-shadow:</span><br><span class="line">        hsl(<span class="number">209.01</span>, <span class="number">86.94</span>%, <span class="number">42.04</span>%) <span class="number">0</span>px <span class="number">0</span>px <span class="number">5</span>px,</span><br><span class="line">        hsl(<span class="number">209.01</span>, <span class="number">86.94</span>%, <span class="number">42.04</span>%) <span class="number">0</span>px <span class="number">0</span>px <span class="number">7</span>px,</span><br><span class="line">        hsl(<span class="number">209.01</span>, <span class="number">86.94</span>%, <span class="number">52.04</span>%) <span class="number">0</span>px <span class="number">0</span>px <span class="number">9</span>px,</span><br><span class="line">        hsl(<span class="number">209.01</span>, <span class="number">86.94</span>%, <span class="number">52.04</span>%) <span class="number">0</span>px <span class="number">0</span>px <span class="number">11</span>px,</span><br><span class="line">        hsl(<span class="number">0</span>, <span class="number">0</span>%, <span class="number">0</span>%) <span class="number">0</span> <span class="number">0</span> <span class="number">2</span>px;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##4. 倒圆角</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="at_rule">@media</span> only screen and (<span class="attribute">min-width</span>: <span class="number">1040px</span>) &#123;</span><br><span class="line">  <span class="tag">body</span> &gt; <span class="tag">nav</span> &#123;</span><br><span class="line">    <span class="variable">@include</span> <span class="function">border-top-radius</span>(.<span class="number">4em</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="tag">body</span> &gt; <span class="tag">footer</span> &#123;</span><br><span class="line">    <span class="variable">@include</span> <span class="function">border-bottom-radius</span>(.<span class="number">4em</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##5. 给博客加上LOGO图片</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="at_rule">@<span class="keyword">media</span> only screen and (min-width: <span class="number">550px</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="tag">body</span> &gt; <span class="tag">header</span> <span class="tag">h1</span><span class="rules">&#123;</span><br><span class="line">      <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="function">url</span>(<span class="string">"/images/logo3.png"</span>) no-repeat <span class="number">0</span> <span class="number">1px</span></span></span>;</span><br><span class="line">      <span class="rule"><span class="attribute">padding-left</span>:<span class="value"> <span class="number">65px</span></span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">body</span> &gt; <span class="tag">header</span> <span class="tag">h2</span> <span class="rules">&#123; <span class="rule"><span class="attribute">padding-left</span>:<span class="value"> <span class="number">65px</span></span></span>; &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##6. 改造侧边栏</p>
+<p>在”source_includes\asides“下创建侧边栏相关模块的html文件，修改博客根目录下的_config.yml文件，主要是default_asides、blog_index_asides、post_asides这几项。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">default_asides: [custom/asides/about<span class="class">.html</span>, custom/asides/weibo<span class="class">.html</span>, asides/recent_posts<span class="class">.html</span>, custom/asides/category_cloud<span class="class">.html</span>, custom/asides/recent_comment<span class="class">.html</span>, custom/asides/blog_link<span class="class">.html</span>, custom/asides/douban<span class="class">.html</span>, custom/asides/license.html]</span><br><span class="line">blog_index_asides: [custom/asides/about<span class="class">.html</span>, custom/asides/weibo<span class="class">.html</span>, asides/recent_posts<span class="class">.html</span>, custom/asides/category_cloud<span class="class">.html</span>, custom/asides/recent_comment<span class="class">.html</span>, custom/asides/blog_link<span class="class">.html</span>, custom/asides/douban<span class="class">.html</span>, custom/asides/license.html]</span><br><span class="line">post_asides: [custom/asides/about<span class="class">.html</span>, custom/asides/weibo<span class="class">.html</span>, asides/recent_posts<span class="class">.html</span>, custom/asides/category_cloud<span class="class">.html</span>, custom/asides/recent_comment<span class="class">.html</span>, custom/asides/blog_link<span class="class">.html</span>, custom/asides/douban<span class="class">.html</span>, custom/asides/license.html]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在custom/asides/about.html中添加About Me信息</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">h1</span>&gt;</span>About Me<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/blogImgs/about.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">p</span>&gt;</span>C++程序员，在Windows上搞音视频开发4年有余<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">p</span>&gt;</span>爱电子产品，爱Google, 爱折腾<span class="tag">&lt;/<span class="title">p</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="title">p</span>&gt;</span>喜欢开源的东西, 喜欢读书和思考, 喜欢做一些geek的事情/东西<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/myemail.png"</span>  <span class="attribute">alt</span>=<span class="value">"shanewfx@gmail.com"</span> /&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>在custom/asides/weibo.html中添加新浪微博模块</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Sina围脖<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">iframe</span> <span class="attribute">width</span>=<span class="value">"100%"</span> <span class="attribute">height</span>=<span class="value">"550"</span> <span class="attribute">class</span>=<span class="value">"share_self"</span>  <span class="attribute">frameborder</span>=<span class="value">"0"</span> <span class="attribute">scrolling</span>=<span class="value">"no"</span> <span class="attribute">src</span>=<span class="value">"http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=300&amp;skin=1&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=0&amp;uid=1684299551&amp;verifier=e30813de&amp;dpc=1"</span>&gt;</span><span class="tag">&lt;/<span class="title">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其中，iframe中的代码是来自新浪微博中”账号-&gt;我的工具-&gt;微博秀“，可以做一些简单的设置，并自动产生出嵌入代码。</p>
+<ul>
+<li>在custom/asides/douban.html中添加豆瓣读书列表</li>
+</ul>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"></span><span class="template_tag">&#123;% <span class="keyword">if</span> site.douban_user %&#125;</span><span class="xml"></span><br><span class="line"><span class="tag">&lt;<span class="title">section</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">h1</span>&gt;</span>My Douban<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://www.douban.com/service/badge/shanewfx/?show=wishlist&amp;amp;n=9&amp;amp;columns=3&amp;amp;hidelogo=yes&amp;amp;cat=movie|book"</span> &gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">section</span>&gt;</span></span><br><span class="line"></span><span class="template_tag">&#123;% <span class="keyword">endif</span> %&#125;</span><span class="xml"></span></span><br></pre></td></tr></table></figure>
+<p>其中，div中的代码来自<a href="http://www.douban.com/service/badgemakerjs" target="_blank" rel="external">豆瓣</a>。<br>同时，要在_config.yml中添加douban_user: XXX (XXX为你的豆瓣用户名)。</p>
+<ul>
+<li>在custom/asides/blog_link.html中添加友情链接</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">h1</span>&gt;</span>大牛博客<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://coolshell.cn/"</span>&gt;</span>酷壳CoolShell<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://mindhacks.cn/"</span>&gt;</span>刘未鹏MIND HACKS<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://blog.codingnow.com/"</span>&gt;</span>云风<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://www.cnblogs.com/Solstice/"</span>&gt;</span>陈硕<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>在custom/asides/recent_comment.html中添加Disqus评论</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">h1</span>&gt;</span>最新评论<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://shanewfx.disqus.com/recent_comments_widget.js?num_items=5&amp;hide_avatars=0&amp;avatar_size=32&amp;excerpt_length=200"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其中，script中的代码由Disqus产生。<br>同时，需要修改_config.yml中Disqus的相关参数:<br>disqus_short_name: XXX (XXX为你的Disqus用户名)<br>disqus_show_comment_count: true</p>
+<p>增加文章的评论需要将该文章对应的markdown文件开始部分中的comments设置为true（冒号后需有一个空格）。</p>
+<p>##7. 增加一键分享</p>
+<p>我目前使用的是<a href="http://www.bshare.cn/" target="_blank" rel="external">bshare</a>。</p>
+<p>在_config.yml中增加bshare: true。<br>在“source_includes\post”下的sharing.html中增加如下代码：</p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"></span><span class="template_tag">&#123;% <span class="keyword">if</span> site.bshare %&#125;</span><span class="xml"></span><br><span class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">class</span>=<span class="value">"bshareDiv"</span> <span class="attribute">href</span>=<span class="value">"http://www.bshare.cn/share"</span>&gt;</span>Sharing<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span> <span class="attribute">src</span>=<span class="value">"http://static.bshare.cn/b/buttonLite.js#uuid=25fcdf85-62f9-400e-b053-627f102edf5a&amp;amp;style=999&amp;amp;img=http%3A%2F%2Fstatic.bshare.cn%2Fimages%2Fbuttons%2Fbox-shareTo-zh.gif&amp;amp;w=147&amp;amp;h=21"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"></span><span class="template_tag">&#123;% <span class="keyword">endif</span> %&#125;</span><span class="xml"></span></span><br></pre></td></tr></table></figure>
+<p>上述的代码由bshare产生，可以自己选择所需的外观。<br>这样，在每一篇文章的最下方会出现一个分享的小工具。</p>
+<p>##8. 添加标签云</p>
+<p>这部分需要第三方的plugin支持，目前我还没有解决中文标签在上传到github上连接出错的问题，在本地是OK的。<br>具体可参看<a href="http://tinyxd.me/blog/2012/06/25/octopress-add-tag-cloud/" target="_blank" rel="external">这篇文章</a>。</p>
+<p>（完）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2012/08/13/improve-blog-theme/" data-id="cijfq73vp001ihwjwxktr0zzn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2012/09/01/learning-regex/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          正则表达式初学笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2012/08/05/notepad-plus-plus/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">善用佳软 Notepad++</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Shane Wu<br>
+      <a href="https://github.com/ken8203/hexo-theme-alberta" target="_blank">Alberta</a> by <a href="http://jaychung.tw" target="_blank">jaychung</a>. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Thank <a href="http://subtlepatterns.com/" target="_blank">Subtlepatterns</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//imsky.github.io/holder/holder.js"></script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

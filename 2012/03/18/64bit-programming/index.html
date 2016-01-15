@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>VS2005下的64位编程与移植 | Shane&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近有个项目需要将32位下的代码移植到64位下，之前没有做过这方面的工作，特别向同事请教了这方面的知识，在此记录下来。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VS2005下的64位编程与移植">
+<meta property="og:url" content="http://yoursite.com/2012/03/18/64bit-programming/index.html">
+<meta property="og:site_name" content="Shane's Blog">
+<meta property="og:description" content="最近有个项目需要将32位下的代码移植到64位下，之前没有做过这方面的工作，特别向同事请教了这方面的知识，在此记录下来。">
+<meta property="og:updated_time" content="2012-03-18T10:09:20.796Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VS2005下的64位编程与移植">
+<meta name="twitter:description" content="最近有个项目需要将32位下的代码移植到64位下，之前没有做过这方面的工作，特别向同事请教了这方面的知识，在此记录下来。">
+  
+    <link rel="alternative" href="/atom.xml" title="Shane&#39;s Blog" type="application/atom+xml">
+  
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="overlay"></div>
+  <div id="header-outer" class="outer">
+    <div id="profile_img">
+      <img id="circle_img" src="holder.js/150x150" />
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shane&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-menu">
+      <nav id="main-nav">
+        <ul>
+        
+          <li><a href="/"><i class="fa fa-home icon-setting"></i></a></li>
+        
+          <li><a href="/archives"><i class="fa fa-archive icon-setting"></i></a></li>
+        
+          <li><a href="/about"><i class="fa fa-user icon-setting"></i></a></li>
+        
+        
+          <li><a href="/atom.xml"><i class="fa fa-rss %> icon-setting"></i></a></li>
+        
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-64bit-programming" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2012/03/18/64bit-programming/" class="article-date">
+  <time datetime="2012-03-18T09:34:00.000Z" itemprop="datePublished">2012-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C/">C++</a>►<a class="article-category-link" href="/categories/C/X64/">X64</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      VS2005下的64位编程与移植
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近有个项目需要将32位下的代码移植到64位下，之前没有做过这方面的工作，特别向同事请教了这方面的知识，在此记录下来。</p>
+<a id="more"></a>
+<p>##VS2005下64位编程环境</p>
+<ol>
+<li><p>VS2005安装时要勾选X64 Compilers and Tools，如果安装时忘记了，则可以重新打开VS2005安装程序来添加；</p>
+</li>
+<li><p>VS2005X64编程环境设置</p>
+</li>
+</ol>
+<ul>
+<li><p>在VS2005的Build菜单下选择Configuration Management；</p>
+</li>
+<li><p>在Configuration Management对话框中的Active solution platform下选择New；</p>
+</li>
+<li><p>在New Solution Platform中的Type or select the new platform下选择x64，OK。</p>
+</li>
+</ul>
+<p>对于没有汇编的程序，上述设置就可以了。但如果代码中有汇编代码，则还需要Project下的Custom Build Rules中切换到MASM64 Bulid Rule。</p>
+<p>缺省情况下，VS2005没有提供到MASM64 Bulid Rule，需要将原来的masm.rules（在C:\Program Files\Microsoft Visual Studio 8\VC\VCProjectDefaults文件夹下）文件拷贝一份，重新命名为masm64.rules，并在VS2005中修改rule中的ml.exe为ml64.exe即可。</p>
+<p>上面设置好之后，就可以在Win32和X64平台间自由切换，但要注意的是，切换的时候也需要将Custom Build Rules切换到相应的平台下。</p>
+<p>##VS2005下64位编程的注意事项</p>
+<ul>
+<li><p>X64平台下，不支持内联汇编，必须将汇编代码提取到独立的.asm文件中去；</p>
+</li>
+<li><p>指针不再是32位，而是64位，汇编代码中涉及32位寄存器间接寻址的，移植时需要修改；</p>
+</li>
+<li><p>32位的寄存器被扩展为64位，又增加了一些新的寄存器；</p>
+</li>
+<li><p>函数参数的传递与32位下汇编不再相同，而是前4个参数分别通过RCX, RDX, R8, R9来传递，其他的参数通过堆栈来传递；</p>
+</li>
+</ul>
+<p>上述的应该是最基本的，要在64位平台中进行编程，还需要了解更多的这方面的知识。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2012/03/18/64bit-programming/" data-id="cijfq743c002yhwjwdsegpxca" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2012/03/18/a-simple-log-tool/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          A Simple Log Tool
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2012/03/17/compile-boost-v1-dot-49-dot-0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Compile Boost v1.49.0</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Shane Wu<br>
+      <a href="https://github.com/ken8203/hexo-theme-alberta" target="_blank">Alberta</a> by <a href="http://jaychung.tw" target="_blank">jaychung</a>. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Thank <a href="http://subtlepatterns.com/" target="_blank">Subtlepatterns</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//imsky.github.io/holder/holder.js"></script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
